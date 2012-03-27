@@ -14,6 +14,8 @@
             if(!mysql_select_db("bytOnline")) {
 				echo 'Skaber database<br />';
                 mysql_query("CREATE DATABASE  `bytOnline` ;") or die(mysql_error());
+				//mysql_select_db('bytOnline') or die;
+				mysql_select_db("bytOnline") or die("Der kan ikke oprettes forbindelsen til databasen"); // databasen vælges
 				echo 'Database bytOnline oprettet<br />';
                 }
 			else{
@@ -62,17 +64,18 @@
 				*/
 			}
 			else{
-				echo 'Brugere tabellen er allerede oprettet';
+				echo 'Brugere tabellen er allerede oprettet <br />';
 			}
 			
 			//spil tabel
 			$tjekSpil = "SELECT * FROM spil;";
 			$resultat = mysql_query($tjekSpil);
-			echo 'Tjekker spil tabel<br />';
+			echo 'Tjekker spil tabel <br />';
 			if(!$resultat) {
 				echo 'Laver spiltabellen<br />';
 				$lavSpil = "	CREATE TABLE  `bytOnline`.`spil` (
 					`spilID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+					`brugerID` INT( 10 ) NOT NULL,
 					`spilnavn` VARCHAR( 60 ) NOT NULL ,
 					`spilbeskrivelse` TEXT NOT NULL ,
 					`spilkategori` VARCHAR( 60 ) NOT NULL ,
@@ -88,13 +91,15 @@
 			
 			// bud tabel
 			$tjekBud = "SELECT * FROM bud;";
-			$resultat = mysql_query($tjekSpil);
+			$resultat = mysql_query($tjekBud);
 			echo 'Tjekker bud tabel<br />';
 			if(!$resultat) {
 				echo 'Laver budtabellen<br />';
 				$lavBud = "	CREATE TABLE  `bytOnline`.`bud` (
 					`budID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-					`besked` TEXT NOT NULL
+					`besked` TEXT NOT NULL ,
+					`selgerID` INT(10) NOT NULL ,
+					`koberID` INT(10) NOT NULL
 					) ENGINE = INNODB;";
 				mysql_query($lavBud) or die(mysql_error());
 				echo 'Bud tabel oprettet <br />';
@@ -102,142 +107,34 @@
 			else {
 				echo 'Bud tabel allerede oprettet <br />';
 			}
-			// Relationer
+			//Relationer
+			echo 'laver relationer <br />';
 			
-			$brugereRelation = "ALTER TABLE  `brugere` ADD INDEX (  `brugerID` )";
-			$lavRelationForBruger = "ALTER TABLE  `brugere` ADD FOREIGN KEY (  `brugerID` ) REFERENCES  `bytOnline`.`spil` (
+			//Spil
+			$brugereRelation = "ALTER TABLE  `spil` ADD INDEX (  `brugerID` )";
+			$lavRelationForBruger = "ALTER TABLE  `spil` ADD FOREIGN KEY (  `spilID` ) REFERENCES  `bytOnline`.`brugere` (
 						`brugerID`
 						) ON DELETE CASCADE ON UPDATE CASCADE ;";
 			mysql_query($brugereRelation) or die(mysql_error());
 			mysql_query($lavRelationForBruger) or die(mysql_error());
-		}
-/*
-		$checkCats = "SELECT * FROM categories;";
-		$result = mysql_query($checkCats);
-		echo 'Checking table categories<br />';
-		if(!$result) {
-			echo 'Creating table categories.<br />';
-			$makeCats = "	CREATE TABLE  `miForum`.`categories` (
-					`categoryID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-					`categoryName` VARCHAR( 30 ) NOT NULL ,
-					`description` TEXT NULL ,
-					UNIQUE (
-						`categoryName`
-					)
-					) ENGINE = INNODB;";
-			mysql_query($makeCats) or die(mysql_error());
-			echo 'Created table categories<br />';
-                
-        	} else {
-			// Code for checking columns of table.
-		}
-		$checkFora = "SELECT * FROM fora;";
-		$result = mysql_query($checkFora);
-		echo 'Checking table fora<br />';
-		if(!$result) {
-			echo 'Creating table fora.<br />';
-			$makeFora = "	CREATE TABLE  `miForum`.`fora` (
-					`foraID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-					`name` VARCHAR( 30 ) NOT NULL ,
-					`categoryID` INT( 10 ) NOT NULL ,
-					`description` TEXT NULL
-					) ENGINE = INNODB;";
-			mysql_query($makeFora) or die(mysql_error());
-			echo 'Created table fora<br />';
-                
-        	} else {
-			// Code for checking columns of table.
-		}
-		$checkThreads = "SELECT * FROM threads;";
-		$result = mysql_query($checkThreads);
-		echo 'Checking table threads<br />';
-		if(!$result) {
-			echo 'Creating table threads.<br />';
-			$makeThreads = "CREATE TABLE  `miForum`.`threads` (
-					`threadID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-					`name` VARCHAR( 30 ) NOT NULL ,
-					`foraID` INT( 10 ) NOT NULL ,
-					`userID` INT( 10 ) NOT NULL ,
-					`description` TEXT NOT NULL
-					) ENGINE = INNODB;";
-			mysql_query($makeThreads) or die(mysql_error());
-			echo 'Created table threads<br />';
-                
-        	} else {
-			// Code for checking columns of table.
-		}
-		$checkPosts = "SELECT * FROM post;";
-		$result = mysql_query($checkPosts);
-		echo 'Checking table post<br />';
-		if(!$result) {
-			echo 'Creating table post.<br />';
-			$makePosts = "	CREATE TABLE  `miForum`.`post` (
-					`postID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-					`threadID` INT( 10 ) NOT NULL ,
-					`userID` INT( 10 ) NOT NULL ,
-					`text` LONGTEXT NOT NULL
-					) ENGINE = INNODB;";
-			mysql_query($makePosts) or die(mysql_error());
-			echo 'Created table post<br />';
-                
-        	} else {
-			// Code for checking columns of table.
-		}
-		$checkArticles = "SELECT * FROM articles;";
-		$result = mysql_query($checkArticles);
-		echo 'Checking table articles<br />';
-		if(!$result) {
-			echo 'Creating table articles.<br />';
-			$makeArticles = "	CREATE TABLE  `miForum`.`articles` (
-					`articleID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
-					`title` VARCHAR( 30 ) NOT NULL ,
-					`text` LONGTEXT NOT NULL ,
-					`writerID` INT( 10 ) NOT NULL ,
-					INDEX (  `articleID` )
-					) ENGINE = INNODB;";
-			mysql_query($makeArticles) or die(mysql_error());
-			echo 'Created table articles<br />';
-                
-        	} else {
-			// Code for checking columns of table.
-		}
-		
-		/* Create mi-site user. Dette den her kode gør er at den skaber privilegier til bytOnline databasen, men ikke nogen andre databaser
-		på den måde undgås det at det folk udefra kan pille ved andre databaser/(HUSKE SLUT) 
-		$checkUser = "SELECT user FROM mysql.user WHERE user='misite'";
-		if(mysql_num_rows(mysql_query($checkUser)) < 1) {
-			$query = "CREATE USER 'misite'@'localhost' IDENTIFIED BY  'kummefryser';";
-			$grant = "GRANT ALL PRIVILEGES ON  `miForum` . * TO  'misite'@'localhost' WITH GRANT OPTION ;"; // F**king long query.
-			mysql_query($query) or die(mysql_error());
-			mysql_query($grant) or die(mysql_error());
 			
-			echo "Created user misite";
+			//Bud
+			$budSelgerRelation = "ALTER TABLE  `bud` ADD INDEX (  `selgerID` )";
+			$budKoberRelation = "ALTER TABLE  `bud` ADD INDEX (  `koberID` )";
+			mysql_query($budSelgerRelation) or die(mysql_error());
+			mysql_query($budKoberRelation) or die(mysql_error());
+			
+			$lavRelationForSelgerBud = "ALTER TABLE  `bud` ADD FOREIGN KEY (  `selgerID` ) REFERENCES  `bytOnline`.`spil` (
+						`spilID`
+						) ON DELETE CASCADE ON UPDATE CASCADE ;";
+			mysql_query($lavRelationForSelgerBud) or die(mysql_error());
+			
+			$lavRelationForKoberBud = "ALTER TABLE  `bud` ADD FOREIGN KEY (  `koberID` ) REFERENCES  `bytonline`.`spil` (
+						`spilID`
+						) ON DELETE CASCADE ON UPDATE CASCADE;";
+			mysql_query($lavRelationForKoberBud) or die(mysql_error());
+			
+			echo 'relationer er oprettet<br />';
 		}
-
-		// Relations
-		$alterFora = "ALTER TABLE  `fora` ADD INDEX (  `categoryID` )";
-		$makeRelationForaCat = "ALTER TABLE  `fora` ADD FOREIGN KEY (  `categoryID` ) REFERENCES  `miForum`.`categories` (
-						`categoryID`
-						) ON DELETE CASCADE ON UPDATE CASCADE ;";
-		mysql_query($alterFora) or die(mysql_error());
-		mysql_query($makeRelationForaCat) or die(mysql_error());
-
-		$alterThreads = "ALTER TABLE  `threads` ADD INDEX (  `foraID` )";
-		$makeRelationThreadsFora = "ALTER TABLE  `threads` ADD FOREIGN KEY (  `foraID` ) REFERENCES  `miForum`.`fora` (
-						`foraID`
-						) ON DELETE CASCADE ON UPDATE CASCADE ;";
-		mysql_query($alterThreads) or die(mysql_error());
-		mysql_query($makeRelationThreadsFora) or die(mysql_error());
-
-		$alterPost = "ALTER TABLE  `post` ADD INDEX (  `threadID` )";
-		$makeRelationPostThreads = "ALTER TABLE  `post` ADD FOREIGN KEY (  `threadID` ) REFERENCES  `miForum`.`threads` (
-						`threadID`
-						) ON DELETE CASCADE ON UPDATE CASCADE ;";
-		mysql_query($alterThreads) or die(mysql_error());
-		mysql_query($makeRelationPostThreads) or die(mysql_error());
-	}
-	//mysql_select_db("bytOnline") or die("noget gik galt, kan ikke få forbindelse til databsen"); // databasen vælges
-	*/
 ?>
-
-<a href="index.php">Return to Index page</a> <!-- tilbage til forside-->
+<br /><a href="index.php">Return to Index page</a> <!-- tilbage til forside link-->
