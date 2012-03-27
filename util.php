@@ -30,7 +30,8 @@
         echo "</a>";
 		return true;
 	}
-
+	
+		
 	function top($title = 'bytOnline', $cssdir = '') { //cssdir kan kaldes i f. eks en undermappe hvis nødvendigt
 		/*
 			Det her er headeren (skal kaldes i starten på alle sider)
@@ -47,42 +48,42 @@
 		
 		echo "<body><div class='content'>";// starter body
 							// Klar til logo echo "<div style='margin: 5px;'><img src='images/logo.jpg' /></div>";
-		//menu($cssdir);
+		menu($cssdir);
 
 	}
 	
-	// function menu($cssdir = '') {
+	function menu($cssdir = '') {
+		
+		@session_start();
+		$loginT = 'Login';
+		$loginL = 'login.php';
+		$redirect = selfURL();
+
+		if(isset($_SESSION['LoggedIn'])) {
+			$loginT = 'Log out';
+			$loginL = 'logout.php?redirect='.$redirect;
+		}
+		//slå associative array op
+		$mainPages = array(	'Forside' => 'index.php', 
+					'Forum' => 'forum.php',
+					'Artikler' => 'articles.php',
+					$loginT => $loginL);
+
+		echo "<div class='menu'>";
+
+		foreach ($mainPages as $name => $page) {
+			echo "<a class='menulink' href='".$cssdir.$page."'>".$name."</a>";
+		}
+
+		echo "</div>";
+	}
 	
-		// @session_start();
-	
-		// $loginT = 'Login';
-		// $loginL = 'login.php';
-		// $redirect = selfURL();
-
-		// if(isset($_SESSION['LoggedIn'])) {
-			// $loginT = 'Log out';
-			// $loginL = 'logout.php?redirect='.$redirect;
-		// }
-
-		// $mainPages = array(	'Forside' => 'index.php', 
-					// 'Forum' => 'forum.php',
-					// 'Artikler' => 'articles.php',
-					// $loginT => $loginL);
-
-		// echo "<div class='menu'>";
-
-		// foreach ($mainPages as $name => $page) {
-			// echo "<a class='menulink' href='".$cssdir.$page."'>".$name."</a>";
-		// }
-
-		// echo "</div>";
-	// }
-
+		
 	function bottom() {
 		/*
-			Afslutter body og html tag
+			Afslutter body og html tag, (skal kaldes i slutningen af alle sider)
 		*/
-		if(isset($conn)) mysql_close($conn);// hvis der er conetcted til databasen så lukkes
+		if(isset($conn)) mysql_close($conn);// hvis der er conetcted til databasen så lukkes den
 
 		echo "</div>";
 		echo "</body>";
