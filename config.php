@@ -1,11 +1,11 @@
 <!--
-       Denne fil skaber databasen,
+       Denne fil skaber databasen
 -->
 
 <?php
         //Får at connecte til databasen så forventer den et brugernavn og et password
-		if(!isset($_POST['mysql_username']) or !isset($_POST['mysql_pw'])){
-		echo'INGEN ADGANG';
+		if(!isset($_POST['mysql_username']) or !isset($_POST['mysql_pw'])){ //sørger for at uønskede ikke kan rode ved oprettelse af databasen
+		echo'<span style="color:red">INGEN ADGANG</span>';
 		exit;
 		}
 		if($conn = mysql_connect('localhost',$_POST['mysql_username'],$_POST['mysql_pw'])) {
@@ -31,7 +31,7 @@
 			mysql_query($query) or die(mysql_error());
 			mysql_query($grant) or die(mysql_error());
 		
-			echo "Created user eksamensprojekt <br />";
+			echo "eksamensprojekt bruger oprettet <br />";
 		}
 			
 			//brugere tabel

@@ -55,13 +55,13 @@
 	function menu($cssdir = '') {
 		
 		@session_start();
-		$loginT = 'Login';
+		$loginT = 'Log ind';
 		$loginL = 'login.php';
 		$redirect = selfURL();
 
 		if(isset($_SESSION['LoggedIn'])) {
-			$loginT = 'Log out';
-			$loginL = 'logout.php?redirect='.$redirect;
+			$loginT = 'Log af';
+			$loginL = 'logud.php?redirect='.$redirect;
 		}
 		//slå associative array op
 		$mainPages = array(	'Forside' => 'index.php', 
@@ -79,7 +79,7 @@
 	}
 	
 		
-	function bottom() {
+	function bund() {
 		/*
 			Afslutter body og html tag, (skal kaldes i slutningen af alle sider)
 		*/
