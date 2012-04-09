@@ -1,6 +1,10 @@
 <?php
 	require_once('util.php');
 	top();
-	echo "virker det?";
+	echo "<h3>virker det?</h3><br/>";
+	echo "<h3>virker det?</h3><br/>";
+	echo "<h3>virker det?</h3><br/>";
+	echo "<h3>virker det?</h3><br/>";
+	echo "<h3>virker det?</h3><br/>";
 	bund();
 ?>
