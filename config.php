@@ -73,10 +73,10 @@
 			$lavSpil = "	CREATE TABLE  `bytOnline`.`spil` (
 				`spilID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 				`brugerID` INT( 10 ) NOT NULL,
-				`spilnavn` VARCHAR( 60 ) NOT NULL ,
+				`spilnavn` VARCHAR( 120 ) NOT NULL ,
 				`spilbeskrivelse` TEXT NOT NULL ,
-				`spilkategori` VARCHAR( 60 ) NOT NULL ,
-				`priskategori` VARCHAR( 60 ) NOT NULL
+				`spilkategori` VARCHAR( 30 ) NOT NULL ,
+				`priskategori` VARCHAR( 30 ) NOT NULL
 				) ENGINE = INNODB;";
 			mysql_query($lavSpil) or die(mysql_error());
 			echo 'Spil tabel oprettet <br />';

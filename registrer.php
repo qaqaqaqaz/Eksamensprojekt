@@ -2,7 +2,38 @@
 ¨<?php
 	require_once('util.php');
 	top('Registrer');
-	if(!empty($_GET['error'])) {
+	echo "<div class='justering'>";
+	if(!isset($_GET['redirect'])){
+		$_GET['redirect'] = '/eksamensprojekt/index.php';
+	}
+	// sørger for at man ikke kan se registrer siden når man er logget ind
+	if(isset($_SESSION['LoggedIn'])){
+		header('Location: index.php?redirect='.$_GET['redirect']);
+		exit;
+	}
+	
+	if (isset($_GET['error'])){
+		switch($_GET['error']){
+		
+		case 1:
+				echo "<span style='color:red;'>Du mangler at udfylde nogle af formene.</span><br /><br />";
+				break;
+				
+		case 2:
+				echo "<span style='color:red;'>Adgangkoderne er ikke ens!</span><br /><br />";
+				break;
+				
+		case 3:
+				echo "<span style='color:red;'>Brugernavn eksisterer allerede.</span><br /><br />";
+				break;
+		
+		default: 
+				echo "<span style='color:red;'>UKENDT FEJL</span><br />";
+				break;
+		}
+	}
+	
+	/*if(!empty($_GET['error'])) { 
 		if($_GET['error'] == 1){
 			echo "<span style='color:red;'>Du mangler at udfylde nogle af formene.</span><br /><br />";
 		} else if($_GET['error'] == 2) {
@@ -10,12 +41,12 @@
 		} else if ($_GET['error'] == 3) {
 			echo "<span style='color:red;'>Brugernavn eksisterer allerede.</span><br /><br />";
 		}
-	}
+	}*/
 ?>
-<div class='justering'>
-<form method="post" action="registrerQuery.php">
+
+<form action="registrerQuery.php?redirect=<?php echo $_GET['redirect']?>" method="post">
 	Brugernavn: <br />
-	<input maxlength="15" type="text" name="brugernavn" /><br /><br />
+	<input maxlength="16" type="text" name="brugernavn" /><br /><br />
 	Adgangskode: <br />
 	<input type="password" name="password1" /><br /><br />
 	Gentag Adgangskode: <br />
@@ -29,6 +60,6 @@
 	<input type="submit" value"Registrer" name="registrer" />
 </form>
 </div>
-<?php
+<?php 
 	bund();
 ?>

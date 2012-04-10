@@ -14,9 +14,8 @@
 		echo "</head>";//slutter header
 		
 		echo "<body><div class='content'>";// starter body
-		echo "<div style='margin: 5px;'><img src='billeder/logo2.jpg' /></div>";//logo
+		echo "<div style='margin: 5px;'><img src='billeder/logo4.jpg' /></div>";//logo
 		menu($cssdir);
-		
 	}
 	
 	/*
@@ -40,11 +39,11 @@
 			$loginT = 'Log af';
 			$loginL = 'logud.php';
 		}
-		//slå associative array op
+		
 		$mainPages = array(	'Forside' => 'index.php', 
-					'Spil-liste' => 'forum.php',
-					'Profil' => 'articles.php',
-					$loginT => $loginL.'?redirect='.$_SERVER['PHP_SELF']);// hiver det ud ??????????????????????????????????
+					'Spil-liste' => 'spilListe.php',
+					'Profil' => 'profil.php',
+					$loginT => $loginL.'?redirect='.$_SERVER['PHP_SELF']);//											???????
 
 		echo "<div class='menu'>";
 
@@ -52,11 +51,5 @@
 			echo "<a class='menulink' href='".$cssdir.$page."'>".$name."</a>";
 		}
 		echo "</div>";
-	}
-	// can this work						??????????????????????????????????????????????????????
-	function redirect() {
-		if(!isset($_GET['redirect'])){
-			$_GET['redirect'] = '/eksamensprojekt/index.php';
-		}
 	}
 ?>

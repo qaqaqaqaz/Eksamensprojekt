@@ -1,5 +1,13 @@
+/* Cascadig style sheets (css)*/
+body {
+	padding: 0;
+	margin: 0;
+	background-color:#F8F8F8;
+	
+	/*background-image: url('images/line.jpg')*/
+}
 
-/*  denn division sørger for at
+/*  denne division sørger for at
     alt content vil blive centrerert*/
 div.content {
 	width: 640px;
@@ -11,7 +19,7 @@ div.content {
 	aligne elementerne inden for 
 	content og menuebaren*/
 .justering{
-	margin-top: 10px;
+	margin-top: 0px;
 	margin-bottom: 0;
 	margin-left: 0.8%;
 	margin-right: 1.3%;
@@ -22,15 +30,14 @@ div.content {
 /*css til menuen*/
 .menu {
 	height: 25px;
-	margin: 0;
-	padding: 0;
+	padding: 0px;
 	margin-left: 4px;
 	color: #FFFFFF;
 	overflow: hidden;
 }
 
 .menulink {
-	color: #FFFFFF;
+	color: #F8F8F8;
 	font-family: 'Arial Black', Gadget, sans-serif;
 	display: block;
 	float: left;
@@ -46,40 +53,25 @@ div.content {
 	background-color:#006600;
 }
 
-.boxlink {
-	color: black;
-	display: block;
-	width: 95%;
-	height: 100%;
-	float: top;
-	border-bottom: 1px solid #8080FF;
-}
-
-.box {
-	width: 200px;
-	height: 150px;
-	border-width: 1px;
+.mulighedsboks {
+	width: 620px;
+	height: auto;
+	border-width: 2px;
 	border-style: solid;
-	border-color: #8080FF;
-	background-color: #FFFFFF;
+	border-color: #003300;
 	float: left;
-	margin: 5px;
-}
-
-.forabox {
-	width: 624px;
-	height: 100px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #8080FF;
-
-	float: left;
-	margin: 5px;
+	margin-left: 0.8%;
+	overflow: hidden;
+	padding: 2px;
 }
 
 .box p {
 	margin-left: 5px;
 	margin-right: 5px;
+}
+h2 {
+	padding: 0;
+	margin: 0;
 }
 
 h3 {

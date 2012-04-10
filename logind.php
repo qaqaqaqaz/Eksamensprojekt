@@ -2,7 +2,15 @@
 <?php
 	require_once('util.php');
 	top('Log ind');
-
+	if(!isset($_GET['redirect'])){
+		$_GET['redirect'] = '/eksamensprojekt/index.php';
+	}
+	// sørger for man ikke kan se login side når man er logget ind.
+	if(isset($_SESSION['LoggedIn'])){
+		header('Location: index.php?redirect='.$_GET['redirect']);
+		exit;
+	}
+	echo "<div class='justering'>";
 	//tjekker om loginQuery har opdaget nogle fejl og giver en tilsvarende fejlmeddelelse
 	if(isset($_GET['error'])){
 		switch($_GET['error']){
@@ -23,13 +31,13 @@
 				echo "<span style='color:red;'>UKENDT FEJL.</span><br /><br />";
 				break;
 		}
-	}	
+	}
 
 ?>
 
 <!-- Loging form -->
-<div class='justering'>
-<form action="loginQuery.php" method="post" >
+
+<form action="loginQuery.php?redirect=<?php echo $_GET['redirect']?>" method="post" >
 	Brugernavn:<br />
 	<input type="text" name="brugernavn" />
 	<br />
