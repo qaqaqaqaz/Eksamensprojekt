@@ -1,6 +1,7 @@
 <?php
 	require_once('connect.php');
 	require_once('util.php');
+	$nytSpil = "";
 	if(!isset($_GET['redirect'])){
 		$_GET['redirect'] = '/eksamensprojekt/index.php';
 	}
@@ -18,14 +19,23 @@
 	$spilKategori = mysql_real_escape_string($_POST['spilKategori']);
 	$prisKategori = mysql_real_escape_string($_POST['prisKategori']);
 	$spilBeskrivelse = mysql_real_escape_string(str_replace($search, $replace, $_POST['spilBeskrivelse']));
+	$brugerID = mysql_real_escape_string($_POST['brugerID']);
 	
-	$nytSpil = "INSERT INTO spil (spilnavn,spilbeskrivelse,spilkategori,priskategori) VALUES ('".$spilNavn."','".$spilBeskrivelse."','".$spilKategori."','".$prisKategori."');";
-	
-	/*
-	if(mysql_query($nytSpil)) {
-		header('Location: profil.php?error=2&redirect='.$_GET['redirect']); // er egentlig ikke en error, men for at sige spillet er oprettet
+	$nytSpil = "INSERT INTO spil (spilnavn,spilbeskrivelse,spilkategori,priskategori,brugerID) VALUES ('".$spilNavn."','".$spilBeskrivelse."','".$spilKategori."','".$prisKategori."','".$brugerID."');";
+	top();
+	if(mysql_query($nytSpil) or die(mysql_error())){
+		echo "<div class='justering'><h2>Dit spil er nu oprettet.<br />Du vil få besked hvis nogle ønsker at bytte med dig.</h2></div>";
+		echo "<div class='justering'><a href='profil.php?redirect=".$_GET['redirect']."'><h2>Tilbage</h2></a></div>";
+		//echo "<a href='redcat.php?catID=".$id."'>tilbage</a>";
+	//header('Location: profil.php?error=2&redirect='.$_GET['redirect']); 
 	}
-	*/
+	bund();
 	
-	
+
+	/*$sql="INSERT INTO fora (name, description, categoryID)
+				VALUES ('".$overskrift."','".$description."','".$id."');";
+				echo($sql);
+				mysql_query($sql);
+				echo "<a href='redcat.php?catID=".$id."'>tilbage</a>";*/
+				
 ?>

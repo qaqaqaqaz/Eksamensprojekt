@@ -106,7 +106,7 @@
 		
 		//Spil
 		$brugereRelation = "ALTER TABLE  `spil` ADD INDEX (  `brugerID` )";
-		$lavRelationForBruger = "ALTER TABLE  `spil` ADD FOREIGN KEY (  `spilID` ) REFERENCES  `bytOnline`.`brugere` (
+		$lavRelationForBruger = "ALTER TABLE  `spil` ADD FOREIGN KEY (  `brugerID` ) REFERENCES  `bytOnline`.`brugere` (
 					`brugerID`
 					) ON DELETE CASCADE ON UPDATE CASCADE ;";
 		mysql_query($brugereRelation) or die(mysql_error());

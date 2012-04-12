@@ -1,9 +1,10 @@
 <?php
 	require_once('util.php');
-	require_once('logindTjek.php');
 	require_once('connect.php');
 	
-	top();
-	echo"hej";
-	bund();
+	$spilKategori = mysql_real_escape_string($_POST['spilKategori']);
+	$prisKategori = mysql_real_escape_string($_POST['prisKategori']);
+	echo ($spilKategori);
+	
+	
 ?>

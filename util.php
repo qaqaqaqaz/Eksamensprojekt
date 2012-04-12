@@ -3,7 +3,7 @@
 		Det her er headeren (skal kaldes i starten på alle sider! hvor menuen skal vises)
 	*/
 	function top($tittel = 'bytOnline', $cssdir = '') { //cssdir kan kaldes i f. eks en undermappe hvis nødvendigt
-		$dir = $cssdir.'stylesheet.css';
+		$dir = $cssdir.'stylesheetdesign.css';
 		echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>";
 		echo "<html xmlns='http://www.w3.org/1999/xhtml'>";
 		

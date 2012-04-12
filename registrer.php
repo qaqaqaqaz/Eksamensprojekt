@@ -32,16 +32,6 @@
 				break;
 		}
 	}
-	
-	/*if(!empty($_GET['error'])) { 
-		if($_GET['error'] == 1){
-			echo "<span style='color:red;'>Du mangler at udfylde nogle af formene.</span><br /><br />";
-		} else if($_GET['error'] == 2) {
-			echo "<span style='color:red;'>Adgangkoderne er ikke ens!</span><br /><br />";
-		} else if ($_GET['error'] == 3) {
-			echo "<span style='color:red;'>Brugernavn eksisterer allerede.</span><br /><br />";
-		}
-	}*/
 ?>
 
 <form action="registrerQuery.php?redirect=<?php echo $_GET['redirect']?>" method="post">

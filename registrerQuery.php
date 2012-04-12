@@ -1,4 +1,5 @@
 <?php
+	require_once('util.php');
 	require_once('connect.php');
 	$nyBruger = "";
 	if(!isset($_GET['redirect'])){
@@ -39,8 +40,9 @@
 	require_once('util.php');
 	top();
 	if(mysql_query($nyBruger)) {
-	
-		echo "<div class='justering'>Brugeren er oprettet.</div>";
+		echo "<div class='justering'><h2>Brugeren er oprettet.<br />Du kan nu starte med at oprette spil i din profil.</h2></div>";
+		echo "<div class='justering'><a href='profil.php?redirect=".$_GET['redirect']."'><h2>Tilbage</h2></a></div>";
+		
 	}
 	bund();
 ?>
