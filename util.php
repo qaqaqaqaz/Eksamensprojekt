@@ -2,20 +2,20 @@
 	/*
 		Det her er headeren (skal kaldes i starten på alle sider! hvor menuen skal vises)
 	*/
-	function top($tittel = 'bytOnline', $cssdir = '') { //cssdir kan kaldes i f. eks en undermappe hvis nødvendigt
-		$dir = $cssdir.'stylesheetdesign.css';
+	function top($tittel = 'bytOnline') { //cssdir kan kaldes i f. eks en undermappe hvis nødvendigt
+		//$dir = 'stylesheetdesign.css';
 		echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>";
 		echo "<html xmlns='http://www.w3.org/1999/xhtml'>";
 		
 		echo "<head>";//starter header
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"; // sætter charset
 		echo "<title>".$tittel."</title>";//sætter tittel
-		echo "<link rel='stylesheet' type='text/css' href='".$dir."' />";//link til stylesheet
+		echo "<link rel='stylesheet' type='text/css' href='stylesheet.css' />";//link til stylesheet
 		echo "</head>";//slutter header
 		
 		echo "<body><div class='content'>";// starter body
 		echo "<div style='margin: 5px;'><img src='billeder/logo4.jpg' /></div>";//logo
-		menu($cssdir);
+		menu();
 	}
 	
 	/*
@@ -29,7 +29,7 @@
 		echo "</html>";
 	}
 	
-	function menu($cssdir = '') {
+	function menu() {
 		
 		@session_start();
 		$loginT = 'Log ind';
@@ -48,7 +48,7 @@
 		echo "<div class='menu'>";
 
 		foreach ($mainPages as $name => $page) {
-			echo "<a class='menulink' href='".$cssdir.$page."'>".$name."</a>";
+			echo "<a class='menulink' href='".$page."'>".$name."</a>";
 		}
 		echo "</div>";
 	}

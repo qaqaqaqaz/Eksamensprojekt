@@ -24,7 +24,9 @@ Søg efter kategori og pris:
 	<option value="red">Over 300 kr</option>
 	</select>
 <input type="submit" value="Søg" />
+<input type="button" value="Vis alle spil" onclick="location.href='spilListe.php?redirect=<?php echo $_GET['redirect']?>'">
 </form>
+
 <?php
 	
 	if (isset($_POST['spilKategori']) && $_POST['prisKategori']) {
@@ -33,9 +35,14 @@ Søg efter kategori og pris:
 		
 		
 		$resultat = mysql_query("SELECT spilnavn FROM spil WHERE spilkategori='".$spilKategori."' AND priskategori='".$prisKategori."' ORDER BY spilnavn")or die(mysql_error());
-			while($row=mysql_fetch_array($resultat)){
-			echo "<h3>".$row["spilnavn"]."</h3><br />";
-			}
+		while($row=mysql_fetch_array($resultat)){
+		echo "<h3>".$row["spilnavn"]."</h3><br />";
+		}
+	} else {
+		$resultat = mysql_query("SELECT spilnavn FROM spil ORDER BY spilnavn")or die(mysql_error());
+		while($row=mysql_fetch_array($resultat)){
+		echo "<h3>".$row["spilnavn"]."</h3><br />";
+		}
 	}
 	/*
 	$resultat = mysql_query("SELECT ,categoryID FROM categories ORDER BY categoryID DESC;") or die(mysql_error());
