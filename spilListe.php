@@ -7,7 +7,6 @@
 	top();
 	echo "<div class='mulighedsboks'>";
 	echo "<b>Valgmuligheder:</b>";
-
 ?>
 <!-- søgeliste efter kategori-->
 <form action="spilListe.php?redirect=<?php echo $_GET['redirect']?>" method="post" >
@@ -28,20 +27,22 @@ Søg efter kategori og pris:
 </form>
 
 <?php
-	
+	echo "</div>";
 	if (isset($_POST['spilKategori']) && $_POST['prisKategori']) {
 		$spilKategori = mysql_real_escape_string($_POST['spilKategori']);
 		$prisKategori = mysql_real_escape_string($_POST['prisKategori']);
 		
 		
-		$resultat = mysql_query("SELECT spilnavn FROM spil WHERE spilkategori='".$spilKategori."' AND priskategori='".$prisKategori."' ORDER BY spilnavn")or die(mysql_error());
+		$resultat = mysql_query("SELECT spilnavn,spilbeskrivelse FROM spil WHERE spilkategori='".$spilKategori."' AND priskategori='".$prisKategori."' ORDER BY spilnavn")or die(mysql_error());
 		while($row=mysql_fetch_array($resultat)){
-		echo "<h3>".$row["spilnavn"]."</h3><br />";
+		echo "<div class='spilboks'><h3><span>".$row["spilnavn"]."</span></h3>";
+		echo "<p>".$row["spilbeskrivelse"]."</p></div>";
 		}
 	} else {
-		$resultat = mysql_query("SELECT spilnavn FROM spil ORDER BY spilnavn")or die(mysql_error());
+		$resultat = mysql_query("SELECT spilnavn,spilbeskrivelse FROM spil ORDER BY spilnavn")or die(mysql_error());
 		while($row=mysql_fetch_array($resultat)){
-		echo "<h3>".$row["spilnavn"]."</h3><br />";
+		echo "<div class='spilboks'><h3><span>".$row["spilnavn"]."</span></h3>";
+		echo "<p>".$row["spilbeskrivelse"]."</p></div>";
 		}
 	}
 	/*
@@ -53,6 +54,6 @@ Søg efter kategori og pris:
 			echo'<span style="float:right; margin-right:5px; cursor:pointer;" onclick="confirmation('.$row["categoryID"].')">Slet</span></h3>';//slet kategori
 			echo'<br/>';
 			}*/
-	echo "</div>";
+	
 	bund();
 ?>

@@ -5,12 +5,14 @@
 	if(!isset($_GET['redirect'])){
 		$_GET['redirect'] = '/eksamensprojekt/index.php';
 	}
+	
 	top();
+	
 	// Kode der finder brugers navn
 	$velgBruger = 'SELECT fornavn FROM brugere WHERE brugerID = "'.@$_SESSION['LoggedIn'].'";';
 	$resultat = mysql_query($velgBruger) or die(mysql_error());
 	$row = mysql_fetch_array($resultat);
-	echo  "<div class='justering'>Hej ".$row['fornavn']."<br />Der er @ntal der gerne vil bytte med dig</div>";
+	echo  "<div class='justering'><h2>Hej ".$row['fornavn']."</h2><b>Velkommen til din profil, her kan du oprette spil til bytning</b></div><br />";
 	
 	//Oprettelse af nyt spil
 	echo "<div class='mulighedsboks'>";
@@ -52,10 +54,32 @@
 		<option value="yellow">150 til 300 kr</option>
 		<option value="red">Over 300 kr</option>
 	</select><br /><br />
-	
 	<input type="Submit" value="Opret spil" />
 </form>
+
 <?php
-	echo"</div>";
+	echo "</div>";
+	echo "<div class='egnespil'>";
+	echo "<h2>De spil du har oprettet</h2>";
+?>
+<!-- Funktion det beder om godkendelse, før den sletter en besked... -->
+<script type="text/javascript">
+	<!--
+	function confirmation(id) {
+		var answer = confirm("Sikker på du vil slette dette spil?")
+		if (answer){
+			window.location.href = "sletSpil.php?spilID="+id;
+		}
+	}
+	//-->
+</script>	
+<?php
+	$resultat = mysql_query("SELECT spilID,spilnavn,spilbeskrivelse FROM spil WHERE brugerID='".$brugerID."' ORDER BY spilnavn")or die(mysql_error());
+		while($row=mysql_fetch_array($resultat)){
+		echo "<h3><span style='margin-left:5px;'>".$row["spilnavn"]."</span>";
+		echo'<span style="float:right; margin-right:5px; cursor:pointer;" onclick="confirmation('.$row["spilID"].')">Slet</span></h3>';
+		}
+	
+	echo "</div>";
 	bund();
 ?>
