@@ -7,6 +7,7 @@
 	top();
 	echo "<div class='mulighedsboks'>";
 	echo "<b>Valgmuligheder:</b>";
+	$spilKategori = "Kategori";
 ?>
 <!-- søgeliste efter kategori-->
 <form action="spilListe.php?redirect=<?php echo $_GET['redirect']?>" method="post" >

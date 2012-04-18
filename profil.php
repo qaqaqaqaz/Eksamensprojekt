@@ -37,7 +37,7 @@
 	<b>Spillets navn:</b><br />
 	<input maxlength="30" type="text" name="spilNavn" /><br /><br />
 	
-	<b>Spillets kategori </b><br />
+	<b>Spillets kategori</b><br />
 	<select name="spilKategori">
 		<option value="action">Action</option>
 		<option value="adventure">Adventure</option>
