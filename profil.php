@@ -35,7 +35,7 @@
 <form action="opretSpil.php?redirect=<?php echo $_GET['redirect']?>" method="post" >
 <input type="hidden" name="brugerID" value="<?php echo $brugerID;?>"/>
 	<b>Spillets navn:</b><br />
-	<input maxlength="30" type="text" name="spilNavn" /><br /><br />
+	<input maxlength="70" type="text" name="spilNavn" /><br /><br />
 	
 	<b>Spillets kategori</b><br />
 	<select name="spilKategori">

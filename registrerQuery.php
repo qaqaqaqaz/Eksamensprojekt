@@ -29,10 +29,17 @@
 	$nyBruger = "INSERT INTO brugere (brugernavn,password,fornavn,efternavn,email) VALUES ('".$brugernavn."','".$password."','".$fornavn."','".$efternavn."','".$email."');";
 	
 	//tjekker at brugernavnet ikke allerede eksistere
-	$tjekBrugernavn = "SELECT * FROM brugere WHERE brugernavn='".$brugernavn."';";
+	$tjekBrugernavn = "SELECT brugernavn FROM brugere WHERE brugernavn='".$brugernavn."';";
 	$tjek = mysql_query($tjekBrugernavn) or die(mysql_error());
 	if(mysql_num_rows($tjek) > 0) {
 		header('Location: registrer.php?error=3&redirect='.$_GET['redirect']);
+		exit;
+	}
+	//tjekker at email ikke allerede eksistere
+	$tjekEmail = "SELECT email FROM brugere WHERE email='".$email."';";
+	$tjek = mysql_query($tjekEmail) or die(mysql_error());
+	if(mysql_num_rows($tjek) > 0) {
+		header('Location: registrer.php?error=4&redirect='.$_GET['redirect']);
 		exit;
 	}
 	
@@ -41,7 +48,7 @@
 	top();
 	if(mysql_query($nyBruger)) {
 		echo "<div class='justering'><h2>Brugeren er oprettet.<br />Du kan nu starte med at oprette spil i din profil.</h2></div>";
-		echo "<div class='justering'><a href='profil.php?redirect=".$_GET['redirect']."'><h2>Tilbage</h2></a></div>";
+		echo "<div class='justering'><a href='logind.php?redirect=".$_GET['redirect']."'><h2>Tilbage</h2></a></div>";
 		
 	}
 	bund();

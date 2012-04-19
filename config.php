@@ -1,5 +1,5 @@
 <!--
-       Denne fil skaber databasen
+       Denne fil skaber databasen, bliver kørt gennem installer.php
 -->
 
 <?php
@@ -14,7 +14,6 @@
 		if(!mysql_select_db("bytOnline")) {
 			echo 'Skaber database<br />';
 			mysql_query("CREATE DATABASE  `bytOnline` ;") or die(mysql_error());
-			//mysql_select_db('bytOnline') or die;
 			mysql_select_db("bytOnline") or die("Der kan ikke oprettes forbindelsen til databasen"); // databasen vælges
 			echo 'Database bytOnline oprettet<br />';
 		} else{
@@ -40,7 +39,7 @@
 			echo 'Laver brugertabellen<br />'; //bruger, fornavn, efternavn og email er 4 gange så stor så '<' and '>' kan erstattes med '&lt;' og '&gt;'
 			$lavBrugere = "	CREATE TABLE  `bytOnline`.`brugere` (
 				`brugerID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
-				`brugernavn` VARCHAR( 60 ) NOT NULL ,
+				`brugernavn` VARCHAR( 64 ) NOT NULL ,
 				`password` VARCHAR( 50 ) NOT NULL ,
 				`fornavn` VARCHAR( 120 ) NOT NULL ,
 				`efternavn` VARCHAR( 120 ) NOT NULL ,
@@ -73,7 +72,7 @@
 			$lavSpil = "	CREATE TABLE  `bytOnline`.`spil` (
 				`spilID` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 				`brugerID` INT( 10 ) NOT NULL,
-				`spilnavn` VARCHAR( 120 ) NOT NULL ,
+				`spilnavn` VARCHAR( 280 ) NOT NULL ,
 				`spilbeskrivelse` TEXT NOT NULL ,
 				`spilkategori` VARCHAR( 30 ) NOT NULL ,
 				`priskategori` VARCHAR( 30 ) NOT NULL

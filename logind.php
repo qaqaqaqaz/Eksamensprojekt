@@ -50,7 +50,7 @@
 
 </form>
 
-Har du ikke en bruger? <a href="registrer.php">Registrer dig her!</a>
+Har du ikke en bruger? <a href="registrer.php?redirect<?php echo $_GET['redirect']?>">Registrer dig her!</a>
 </div>
 
 <?php

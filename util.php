@@ -9,7 +9,7 @@
 		echo "<head>";//starter header
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"; // sætter charset
 		echo "<title>".$tittel."</title>";//sætter tittel
-		echo "<link rel='stylesheet' type='text/css' href='stylesheet.css' />";//link til stylesheet
+		echo "<link rel='stylesheet' type='text/css' href='stylesheetdesign.css' />";//link til stylesheet
 		echo "</head>";//slutter header
 		
 		echo "<body><div class='content'>";// starter body

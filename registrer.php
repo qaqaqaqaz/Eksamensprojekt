@@ -26,6 +26,9 @@
 		case 3:
 				echo "<span style='color:red;'>Brugernavn eksisterer allerede.</span><br /><br />";
 				break;
+		case 4:
+				echo "<span style='color:red;'>Den indtastede e-mail eksisterer allerede.</span><br /><br />";
+				break;
 		
 		default: 
 				echo "<span style='color:red;'>UKENDT FEJL</span><br />";
