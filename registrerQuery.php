@@ -16,15 +16,15 @@
 	}
 	
 	//Array som erstartter alle symbolerne '<' og '>' med '&lt;' og '&gt;'
-	$search = array('<', '>');
-	$replace = array('&lt;', '&gt;');
+	$soeg = array('<', '>');
+	$erstat = array('&lt;', '&gt;');
 	
 	// Beskyttelse med Sanitize input
-	$brugernavn = mysql_real_escape_string(str_replace($search, $replace, $_POST['brugernavn']));
+	$brugernavn = mysql_real_escape_string(str_replace($soeg, $erstat, $_POST['brugernavn']));
 	$password = md5(mysql_real_escape_string($_POST['password1']));
-	$fornavn = mysql_real_escape_string(str_replace($search, $replace, $_POST['fornavn']));
-	$efternavn = mysql_real_escape_string(str_replace($search, $replace, $_POST['efternavn']));
-	$email = mysql_real_escape_string(str_replace($search, $replace, $_POST['email']));
+	$fornavn = mysql_real_escape_string(str_replace($soeg, $erstat, $_POST['fornavn']));
+	$efternavn = mysql_real_escape_string(str_replace($soeg, $erstat, $_POST['efternavn']));
+	$email = mysql_real_escape_string(str_replace($soeg, $erstat, $_POST['email']));
 	
 	$nyBruger = "INSERT INTO brugere (brugernavn,password,fornavn,efternavn,email) VALUES ('".$brugernavn."','".$password."','".$fornavn."','".$efternavn."','".$email."');";
 	
@@ -48,7 +48,7 @@
 	top();
 	if(mysql_query($nyBruger)) {
 		echo "<div class='justering'><h2>Brugeren er oprettet.<br />Du kan nu starte med at oprette spil i din profil.</h2></div>";
-		echo "<div class='justering'><a href='logind.php?redirect=".$_GET['redirect']."'><h2>Tilbage</h2></a></div>";
+		echo "<div class='justering'><a href='logind.php?redirect=".$_GET['redirect']."'><h2>Gå til login</h2></a></div>";
 		
 	}
 	bund();

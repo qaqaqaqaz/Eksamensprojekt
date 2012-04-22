@@ -6,8 +6,8 @@
 		echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>";
 		echo "<html xmlns='http://www.w3.org/1999/xhtml'>";
 		echo "<head>";//starter header
-		echo "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"; // sætter charset
-		echo "<title>".$tittel."</title>";//sætter tittel
+		echo "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"; // charset
+		echo "<title>".$tittel."</title>";//tittel
 		echo "<link rel='stylesheet' type='text/css' href='stylesheet.css' />";//link til stylesheet
 		echo "</head>";//slutter header
 		
@@ -23,7 +23,7 @@
 		if(isset($conn)) mysql_close($conn);// hvis der er conetcted til databasen så lukkes den
 		echo "</div>"; // afslutter division
 		echo "</body>";// slutter body
-		echo "</html>";
+		echo "</html>";// afslutter html
 	}
 	
 	/*
@@ -31,7 +31,7 @@
 	*/
 	function menu() {
 		
-		@session_start(); // starter session så data kan sendes mellem siderne @ sørger for ikke at give
+		@session_start(); // starter session så data kan sendes mellem siderne @sørger for ikke at give fejlmeddelser
 		
 		// styre login visningen i menuen, hvis man er loget ind skifter visningen til logud istedet.
 		$loginT = 'Log ind';
@@ -41,15 +41,15 @@
 			$loginT = 'Log af';
 			$loginL = 'logud.php';
 		}
-		
-		$mainPages = array(	'Forside' => 'index.php', 
+		// laver et associative array hvor sidenavn og link defineres
+		$menuSider = array(	'Forside' => 'index.php', 
 					'Spil-liste' => 'spilListe.php',
 					'Profil' => 'profil.php',
 					$loginT => $loginL.'?redirect='.$_SERVER['PHP_SELF']); // PHP_SELF sørger for at returnere den fil der lige er blevet kørt
 
 		echo "<div class='menu'>";
-		foreach ($mainPages as $name => $page) { // sørger for at navn og links bliver vist og fungerer i menuen.
-			echo "<a class='menulink' href='".$page."'>".$name."</a>";
+		foreach ($menuSider as $navn => $side) { // sørger for at navn og links bliver vist og fungerer i menuen.
+			echo "<a class='menulink' href='".$side."'>".$navn."</a>";
 		}
 		echo "</div>";
 	}

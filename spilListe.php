@@ -27,12 +27,14 @@ Søg efter kategori og pris:
 	echo "</div>";
 	// hvis variabler er sat via knappen søg, så sorteres der i spil listen
 	if (isset($_GET['spilKategori']) && $_GET['prisKategori']) {
+	
 		$spilKategori = mysql_real_escape_string($_GET['spilKategori']);
 		$prisKategori = mysql_real_escape_string($_GET['prisKategori']);
 		
 		$resultat = mysql_query("SELECT spilnavn,spilbeskrivelse FROM spil WHERE 
 		spilkategori='".$spilKategori."' AND priskategori='".$prisKategori."' 
 		ORDER BY spilnavn")or die(mysql_error());
+		//visning af spil
 		while($row=mysql_fetch_array($resultat)){
 		echo "<div class='spilboks'><h3><span>".$row["spilnavn"]."</span></h3>";
 		echo "<p>".$row["spilbeskrivelse"]."</p></div>";

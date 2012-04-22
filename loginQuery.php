@@ -24,21 +24,23 @@
 	}
 	
 	//Array som erstartter alle symbolerne '<' og '>' med '&lt;' og '&gt;'
-	$search = array('<', '>');
-	$replace = array('&lt;', '&gt;');
+	$soeg = array('<', '>');
+	$erstat = array('&lt;', '&gt;');
 	// undersøg andre hash kryteringsformer !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	$tjekLogind = "SELECT * FROM brugere WHERE brugernavn=
 	'".mysql_real_escape_string(str_replace(
-	$search, $replace, $_POST['brugernavn']))."' AND password=
+	$soeg, $erstat, $_POST['brugernavn']))."' AND password=
 	'".md5(mysql_real_escape_string($_POST['password']))."';";
 	$resultat = mysql_query($tjekLogind) or die(mysql_error());
-	if(mysql_num_rows($resultat) < 1) { // tjeker om brugernavn og password er rigtig
+	
+	// tjeker om brugernavn og password er rigtig
+	if(mysql_num_rows($resultat) < 1) { 
 		header('Location: logind.php?error=2&redirect='.$_GET['redirect']);
 		unset($_SESSION['LoggedIn']);
 		exit;
 	}
-	$row = mysql_fetch_array($resultat); //Henter valgte data fra databasen
-	$_SESSION['LoggedIn'] = $row['brugerID'];
+	$row = mysql_fetch_array($resultat); //Henter brugerID databasen
+	$_SESSION['LoggedIn'] = $row['brugerID']; // brugerID bliver gemt i session loggedin
 	
 	top();
 

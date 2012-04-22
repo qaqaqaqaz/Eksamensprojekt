@@ -11,14 +11,14 @@
 		exit;
 	}
 	//Array som erstartter alle symbolerne '<' og '>' med '&lt;' og '&gt;'
-	$search = array('<', '>');
-	$replace = array('&lt;', '&gt;');
+	$soeg = array('<', '>');
+	$erstat = array('&lt;', '&gt;');
 	
 	// Beskyttelse med Sanitize input
-	$spilNavn = mysql_real_escape_string(str_replace($search, $replace, $_POST['spilNavn']));
+	$spilNavn = mysql_real_escape_string(str_replace($soeg, $erstat, $_POST['spilNavn']));
 	$spilKategori = mysql_real_escape_string($_POST['spilKategori']);
 	$prisKategori = mysql_real_escape_string($_POST['prisKategori']);
-	$spilBeskrivelse = mysql_real_escape_string(str_replace($search, $replace,
+	$spilBeskrivelse = mysql_real_escape_string(str_replace($soeg, $erstat,
 	$_POST['spilBeskrivelse']));
 	$brugerID = mysql_real_escape_string($_POST['brugerID']);
 	

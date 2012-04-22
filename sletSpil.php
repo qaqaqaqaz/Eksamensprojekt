@@ -5,8 +5,9 @@
 	if(!isset($_GET['spilID'])){
 		header('Location: index.php');
 	}
+	
 	$spilID = mysql_real_escape_string($_GET['spilID']);
-	//test om man er logget ind
+	//test om man må slettes spillet, sammenligner brugerID med brugerID i spil tabel
 	$tjekBruger = "SELECT brugerID FROM spil WHERE spilID='".$spilID."';";
 	$tjekBrugerQuery = mysql_query($tjekBruger) or die(mysql_error());
 	$row = mysql_fetch_array($tjekBrugerQuery);

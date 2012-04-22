@@ -6,10 +6,10 @@
 	echo "<div style='margin:0; margin-left: 5px;'><img src='billeder/drake.jpg' alt='Drake'></img></div>";//forsidebillede: alt = alternativ tekst hvis billede ikke virker
 	echo "<div class='justering'>";
 	echo "<h2>Velkommen til bytOnline!</h2>";
-	echo "<h3>Stedet hvor du kan skaffe nye spil, for dine gamle!</h2><br/>";
+	echo "<h3>Stedet hvor du kan skaffe nye spil, for dine gamle!</h3><br/>";
 	
 	// Visning af de 3 nyeste spil starter her
-	echo "<h2>Her er en liste over de nyeste spil</h2>";
+	echo "<h2>Her er en liste over de nyeste spil du kan bytte med</h2>";
 	echo "</div>";
 	
 	// Finder de nyste spil ved at sortere fra ide

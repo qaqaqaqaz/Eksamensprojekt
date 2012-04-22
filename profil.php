@@ -1,4 +1,4 @@
-<?php
+<?php //
 	require_once('util.php');
 	require_once('logindTjek.php');
 	require_once('connect.php');
@@ -19,7 +19,7 @@
 		switch($_GET['error']){
 		
 		case 1:
-				echo "<span style='color:red;'>Du mangler at udfylde nogle af formene.</span><br /><br />";
+				echo "<span style='color:red;'>Du mangler at udfylde nogle af felterne.</span><br /><br />";
 				break;
 		default: 
 				echo "<span style='color:red;'>UKENDT FEJL</span><br />";
@@ -72,11 +72,10 @@
 <?php
 	//slet af spil
 	$resultat = mysql_query("SELECT spilID,spilnavn,spilbeskrivelse FROM spil WHERE brugerID='".$brugerID."' ORDER BY spilnavn")or die(mysql_error());
-		while($row=mysql_fetch_array($resultat)){
+	while($row=mysql_fetch_array($resultat)){
 		echo "<h3><span style='margin-left:5px;'>".$row["spilnavn"]."</span>";
 		echo'<span style="float:right; margin-right:5px; cursor:pointer;" onclick="confirmation('.$row["spilID"].')">Slet</span></h3>';
-		}
-	
+	}
 	echo "</div>";
 	bund();
 ?>

@@ -1,4 +1,5 @@
-<!-- denne fil styrre login hvis man er bruger, ellers kan man gå til oprettelse af bruger-->
+<!-- logind.php
+denne fil styre login hvis man er bruger, ellers kan man gå til oprettelse af bruger-->
 <?php
 	// sikre at redirect bliver sat.
 	if(!isset($_GET['redirect'])){
@@ -52,10 +53,8 @@
 	<input type="Submit" value="Log ind" />
 
 </form>
-
 Har du ikke en bruger? <a href="registrer.php?redirect<?php echo $_GET['redirect']?>">Registrer dig her!</a>
 </div>
-
 <?php
 	bund();
 ?>
