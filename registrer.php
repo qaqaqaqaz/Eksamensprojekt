@@ -16,18 +16,22 @@
 		switch($_GET['error']){
 		
 		case 1:
-				echo "<span style='color:red;'>Du mangler at udfylde nogle af formene.</span><br /><br />";
+				echo "<span style='color:red;'>
+				Du mangler at udfylde nogle af formene.</span><br /><br />";
 				break;
 				
 		case 2:
-				echo "<span style='color:red;'>Adgangkoderne er ikke ens!</span><br /><br />";
+				echo "<span style='color:red;'>
+				Adgangkoderne er ikke ens!</span><br /><br />";
 				break;
 				
 		case 3:
-				echo "<span style='color:red;'>Brugernavn eksisterer allerede.</span><br /><br />";
+				echo "<span style='color:red;'>
+				Brugernavn eksisterer allerede.</span><br /><br />";
 				break;
 		case 4:
-				echo "<span style='color:red;'>Den indtastede e-mail eksisterer allerede.</span><br /><br />";
+				echo "<span style='color:red;'>
+				Den indtastede e-mail eksisterer allerede.</span><br /><br />";
 				break;
 		
 		default: 

@@ -1,15 +1,18 @@
 <!-- denne fil styrre login hvis man er bruger, ellers kan man gå til oprettelse af bruger-->
 <?php
-	require_once('util.php');
-	top('Log ind');
+	// sikre at redirect bliver sat.
 	if(!isset($_GET['redirect'])){
 		$_GET['redirect'] = '/eksamensprojekt/index.php';
 	}
+	require_once('util.php');
+	session_start();// starter session
 	// sørger for man ikke kan se login side når man er logget ind.
 	if(isset($_SESSION['LoggedIn'])){
-		header('Location: index.php?redirect='.$_GET['redirect']);
+		header('Location: index.php');
 		exit;
 	}
+	
+	top('Log ind');
 	echo "<div class='justering'>";
 	//tjekker om loginQuery har opdaget nogle fejl og giver en tilsvarende fejlmeddelelse
 	if(isset($_GET['error'])){
@@ -35,7 +38,7 @@
 
 ?>
 
-<!-- Loging form -->
+<!-- Log ind form -->
 
 <form action="loginQuery.php?redirect=<?php echo $_GET['redirect']?>" method="post" >
 	Brugernavn:<br />

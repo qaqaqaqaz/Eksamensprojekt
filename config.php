@@ -8,9 +8,11 @@
 		echo'<span style="color:red">INGEN ADGANG</span>';
 		exit;
 	}
+	// conecter til phpMyAdmin
 	if($conn = mysql_connect('localhost',$_POST['mysql_username'],$_POST['mysql_pw'])) {
 		echo 'Logget ind!<br />';
 		echo 'Tjekker databasen bytOnline<br />';
+	// opretter database
 		if(!mysql_select_db("bytOnline")) {
 			echo 'Skaber database<br />';
 			mysql_query("CREATE DATABASE  `bytOnline` ;") or die(mysql_error());
@@ -21,7 +23,9 @@
 		}
 		/*sikkerhedsbruger
 		Dette den her kode gør er at den skaber privilegier til bytOnline databasen, men ikke nogen andre databaser
-		på den måde undgås det at det folk udefra kan pille ved andre databaser hvis man skulle glemme at beskytte sig mod intruders*/
+		på den måde undgås det at det folk udefra kan pille ved andre databaser hvis man skulle glemme at beskytte sig mod indtrængen
+		*/
+		
 		$tjekBruger = "SELECT user FROM mysql.user WHERE user='eksamensprojekt'";
 		if(mysql_num_rows(mysql_query($tjekBruger)) < 1) {//tjekker om brugeren er oprettet før
 			$query = "CREATE USER 'eksamensprojekt'@'localhost' IDENTIFIED BY  'kummefryser';";
@@ -54,11 +58,6 @@
 				//http://dev.mysql.com/doc/refman/5.0/en/innodb-storage-engine.html link til forklaring på INNODB
 			mysql_query($lavBrugere) or die(mysql_error());
 			echo 'Brugere tabel oprettet <br />';
-	
-			/*laver standard admin, til bestemte adminfunktioner
-			$lavStandardAdmin = "INSERT INTO brugere (brugernavn,password,fornavn,efternavn,email,isAdmin) VALUES ('admin','".md5("admin")."','Admin','Admin','admin',1);";
-			mysql_query($lavStandardAdmin) or die(mysql_error());
-			*/
 		} else{
 			echo 'Brugere tabellen er allerede oprettet <br />';
 		}
@@ -128,6 +127,28 @@
 		mysql_query($lavRelationForKoberBud) or die(mysql_error());
 		
 		echo 'relationer er oprettet<br />';
+		
+		$brugerenoget = array(
+		array('brugerID'=>1,'brugernavn'=>'Samson','password'=>'c4ca4238a0b923820dcc509a6f75849b','fornavn'=>'Sam','efternavn'=>'Miller','email'=>'miller.sam@hotmail.com','isAdmin'=>0),
+		array('brugerID'=>2,'brugernavn'=>'Maxter','password'=>'c4ca4238a0b923820dcc509a6f75849b','fornavn'=>'Max','efternavn'=>'Daniels','email'=>'Daniels.Max@hotmail.com','isAdmin'=>0)
+);
+$spilnoget = array(
+  array('spilID'=>1,'brugerID'=>1,'spilnavn'=>'Assasain\'s Creed ','spilbeskrivelse'=>'Godt actionspil, med fede kampe og god historie','spilkategori'=>'action','priskategori'=>'yellow'),
+  array('spilID'=>2,'brugerID'=>1,'spilnavn'=>'RollorCoasterTycoon 3','spilbeskrivelse'=>'Sjovt forlystelses spil hvor kun ens fantasi sætter grænsen','spilkategori'=>'adventure','priskategori'=>'green'),
+  array('spilID'=>3,'brugerID'=>2,'spilnavn'=>'GTA 4','spilbeskrivelse'=>'Godt actionspil, med en fed historie og nice missioner','spilkategori'=>'action','priskategori'=>'yellow'),
+  array('spilID'=>4,'brugerID'=>2,'spilnavn'=>'Insaneaquarium deluxe','spilbeskrivelse'=>'sjovt lille spil hvor du skal beskytte dit akvarium mod aliens og hvor du kan få fisk i alle størelser og farver','spilkategori'=>'action','priskategori'=>'green'),
+  array('spilID'=>5,'brugerID'=>2,'spilnavn'=>'Rayman 3','spilbeskrivelse'=>'Godt adventurespil, med sjov historie og gode levels','spilkategori'=>'adventure','priskategori'=>'yellow'),
+  array('spilID'=>6,'brugerID'=>2,'spilnavn'=>'The simpsons hit and run','spilbeskrivelse'=>'Sjovt komisk adventure spil, hvor du skal klare missioner med de elskede figurer fra the Simpsons','spilkategori'=>'adventure','priskategori'=>'green'),
+  array('spilID'=>7,'brugerID'=>1,'spilnavn'=>'Portal 2','spilbeskrivelse'=>'Rigtig godt puzzle spil, hvor du skal tænke med 2 portaler i et kæmpe gådefuldt kompleks.','spilkategori'=>'fps','priskategori'=>'red'),
+  array('spilID'=>8,'brugerID'=>1,'spilnavn'=>'portal','spilbeskrivelse'=>'Bedre end 2\'eren og den oprindelige historie som er superfed','spilkategori'=>'fps','priskategori'=>'yellow'),
+  array('spilID'=>9,'brugerID'=>1,'spilnavn'=>'BoxHead','spilbeskrivelse'=>'sjovt lille multiplayer spil for alle, der er blodeffekter','spilkategori'=>'fps','priskategori'=>'green'),
+  array('spilID'=>10,'brugerID'=>1,'spilnavn'=>'Formula 10','spilbeskrivelse'=>'Det nyeste racer spil, krøver rat men mega fedt','spilkategori'=>'racing','priskategori'=>'red'),
+  array('spilID'=>11,'brugerID'=>1,'spilnavn'=>'Drift Sanfransisco Bay','spilbeskrivelse'=>'Sej racer spil med en masse baner og ok historis','spilkategori'=>'racing','priskategori'=>'red'),
+  array('spilID'=>12,'brugerID'=>1,'spilnavn'=>'Minestryger pro edition','spilbeskrivelse'=>'god anderledes version','spilkategori'=>'adventure','priskategori'=>'green'),
+  array('spilID'=>19,'brugerID'=>1,'spilnavn'=>1,'spilbeskrivelse'=>1,'spilkategori'=>'action','priskategori'=>'green')
+);
+mysql_query($brugerenoget) or die(mysql_error());
+mysql_query($spilnoget) or die(mysql_error());
 	}
 ?>
 <br /><a href="index.php">Return to Index page</a> <!-- tilbage til forside link-->

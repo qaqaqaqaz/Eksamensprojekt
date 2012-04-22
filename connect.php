@@ -1,5 +1,5 @@
 <?php
-	
+	// denne fil skaber forbindelse til databasen med den bruger der blev oprettet i config.php
 	$dbhost = 'localhost';
 	$dbuser = 'eksamensprojekt';
 	$dbpass = 'kummefryser';

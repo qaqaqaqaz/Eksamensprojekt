@@ -2,14 +2,9 @@
 	require_once('util.php');
 	require_once('logindTjek.php');
 	require_once('connect.php');
-	if(!isset($_GET['redirect'])){
-		$_GET['redirect'] = '/eksamensprojekt/index.php';
-	}
-	
 	top();
-	
 	// Kode der finder brugers navn
-	$velgBruger = 'SELECT fornavn FROM brugere WHERE brugerID = "'.@$_SESSION['LoggedIn'].'";';
+	$velgBruger = 'SELECT fornavn FROM brugere WHERE brugerID = "'.$_SESSION['LoggedIn'].'";';
 	$resultat = mysql_query($velgBruger) or die(mysql_error());
 	$row = mysql_fetch_array($resultat);
 	echo  "<div class='justering'><h2>Hej ".$row['fornavn']."</h2><b>Velkommen til din profil, her kan du oprette spil til bytning</b></div><br />";
@@ -32,7 +27,8 @@
 		}
 	}
 ?>
-<form action="opretSpil.php?redirect=<?php echo $_GET['redirect']?>" method="post" >
+<!-- Oprettelse af spil -->
+<form action="opretSpil.php" method="post" >
 <input type="hidden" name="brugerID" value="<?php echo $brugerID;?>"/>
 	<b>Spillets navn:</b><br />
 	<input maxlength="70" type="text" name="spilNavn" /><br /><br />
@@ -74,6 +70,7 @@
 	//-->
 </script>	
 <?php
+	//slet af spil
 	$resultat = mysql_query("SELECT spilID,spilnavn,spilbeskrivelse FROM spil WHERE brugerID='".$brugerID."' ORDER BY spilnavn")or die(mysql_error());
 		while($row=mysql_fetch_array($resultat)){
 		echo "<h3><span style='margin-left:5px;'>".$row["spilnavn"]."</span>";

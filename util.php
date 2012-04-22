@@ -2,35 +2,38 @@
 	/*
 		Det her er headeren (skal kaldes i starten på alle sider! hvor menuen skal vises)
 	*/
-	function top($tittel = 'bytOnline') { //cssdir kan kaldes i f. eks en undermappe hvis nødvendigt
-		//$dir = 'stylesheetdesign.css';
+	function top($tittel = 'bytOnline') { // tittel kan ændres på sider når top kaldes
 		echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>";
 		echo "<html xmlns='http://www.w3.org/1999/xhtml'>";
 		echo "<head>";//starter header
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"; // sætter charset
 		echo "<title>".$tittel."</title>";//sætter tittel
-		echo "<link rel='stylesheet' type='text/css' href='stylesheetdesign.css' />";//link til stylesheet
+		echo "<link rel='stylesheet' type='text/css' href='stylesheet.css' />";//link til stylesheet
 		echo "</head>";//slutter header
 		
 		echo "<body><div class='content'>";// starter body
-		echo "<div style='margin: 5px;'><img src='billeder/logo4.jpg' /></div>";//logo
-		menu();
+		echo "<div style='margin: 5px;'><img src='billeder/logo4.jpg' alt='logo'></img></div>";//logo: alt = alternativ tekst hvis billede ikke virker
+		menu();// kalder menuen
 	}
 	
 	/*
-		Afslutter body og html tag, (skal kaldes i slutningen af alle sider)
+		Det her afslutter body og html tag, (skal kaldes i slutningen af alle sider)
 	*/
 	function bund() {
-		
 		if(isset($conn)) mysql_close($conn);// hvis der er conetcted til databasen så lukkes den
-		echo "</div>";
-		echo "</body>";
+		echo "</div>"; // afslutter division
+		echo "</body>";// slutter body
 		echo "</html>";
 	}
 	
+	/*
+		Det her styre menuen og hvordan den bliver vist, samme med stylesheet.
+	*/
 	function menu() {
 		
-		@session_start();
+		@session_start(); // starter session så data kan sendes mellem siderne @ sørger for ikke at give
+		
+		// styre login visningen i menuen, hvis man er loget ind skifter visningen til logud istedet.
 		$loginT = 'Log ind';
 		$loginL = 'logind.php';
 
@@ -42,11 +45,10 @@
 		$mainPages = array(	'Forside' => 'index.php', 
 					'Spil-liste' => 'spilListe.php',
 					'Profil' => 'profil.php',
-					$loginT => $loginL.'?redirect='.$_SERVER['PHP_SELF']);//											???????
+					$loginT => $loginL.'?redirect='.$_SERVER['PHP_SELF']); // PHP_SELF sørger for at returnere den fil der lige er blevet kørt
 
 		echo "<div class='menu'>";
-
-		foreach ($mainPages as $name => $page) {
+		foreach ($mainPages as $name => $page) { // sørger for at navn og links bliver vist og fungerer i menuen.
 			echo "<a class='menulink' href='".$page."'>".$name."</a>";
 		}
 		echo "</div>";

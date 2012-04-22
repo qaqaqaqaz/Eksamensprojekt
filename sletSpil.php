@@ -2,9 +2,6 @@
 	require_once('util.php');
 	require_once('logindTjek.php');
 	require_once('connect.php');
-	if(!isset($_GET['redirect'])){
-		$_GET['redirect'] = '/eksamensprojekt/index.php';
-	}
 	if(!isset($_GET['spilID'])){
 		header('Location: index.php');
 	}
@@ -17,6 +14,7 @@
 		header('Location: index.php');
 		exit();
 	} else {
+	//spil slettes og service besked samt tilbagelink gives.
 	top();
 	$sletSpil = "DELETE FROM spil WHERE spilID = ".$spilID.";";
 	mysql_query($sletSpil) or die(mysql_error());
