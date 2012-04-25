@@ -43,7 +43,7 @@
 		exit;
 	}
 	
-	//opretter bruger
+	//opretter bruger med $nyBruger SQL-koden
 	require_once('util.php');
 	top();
 	if(mysql_query($nyBruger)) {

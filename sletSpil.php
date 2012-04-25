@@ -1,7 +1,9 @@
 <?php
+    // sletSpil.php
 	require_once('util.php');
 	require_once('logindTjek.php');
 	require_once('connect.php');
+
 	if(!isset($_GET['spilID'])){
 		header('Location: index.php');
 	}

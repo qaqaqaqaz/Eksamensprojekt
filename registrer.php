@@ -40,7 +40,7 @@
 		}
 	}
 ?>
-
+<!-- Registrerings form-->
 <form action="registrerQuery.php?redirect=<?php echo $_GET['redirect']?>" method="post">
 	Brugernavn: <br />
 	<input maxlength="16" type="text" name="brugernavn" /><br /><br />

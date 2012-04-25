@@ -42,6 +42,7 @@ denne fil styre login hvis man er bruger, ellers kan man gå til oprettelse af br
 <!-- Log ind form -->
 
 <form action="loginQuery.php?redirect=<?php echo $_GET['redirect']?>" method="post" >
+<p>
 	Brugernavn:<br />
 	<input type="text" name="brugernavn" />
 	<br />
@@ -49,9 +50,9 @@ denne fil styre login hvis man er bruger, ellers kan man gå til oprettelse af br
 	Adgangskode:<br />
 	<input type="password" name="password" />
 	<br />
-	
-	<input type="Submit" value="Log ind" />
 
+	<input type="submit" value="Log ind" />
+</p>
 </form>
 Har du ikke en bruger? <a href="registrer.php?redirect<?php echo $_GET['redirect']?>">Registrer dig her!</a>
 </div>

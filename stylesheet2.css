@@ -29,7 +29,6 @@ div.content {
 .menu {
 	height: 25px;
 	margin-left: 4px;
-	color: #F8F8F8;
 	overflow: hidden;
 }
 
@@ -89,6 +88,10 @@ div.content {
 	padding: 2px;
 	margin-top: 5px;
 	word-wrap:break-word;
+}
+p {
+	padding: 0;
+	margin: 0;
 }
 
 h2 { /* fjerne webbrowserens egen indryk og alignment*/
